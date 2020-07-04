@@ -1,6 +1,6 @@
 # Flutter Simple Platform Channel
 
-A simple Flutter project implement platform channel. This can be use as a template for MethodChannel on forward and reverse between Flutter and Native and EventChannel for Stream event. It is implement for Android Kotlin.
+A simple Flutter project implement platform channel. This can be use as a template for MethodChannel on forward and reverse between Flutter and Native and EventChannel for Stream event. It is implement for Android Kotlin and iOS Swift.
 
 ## Getting Started
 
