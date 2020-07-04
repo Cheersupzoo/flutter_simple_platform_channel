@@ -43,14 +43,14 @@ class MainActivity: FlutterActivity() {
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(
                                         { timer: Long ->
-                                            Log.w(TAG, "emitting timer event $timer")
+                                            Log.w(TAG, "onNext: Android timer event $timer")
                                             events?.success(timer)
                                         },
                                         { error: Throwable ->
-                                            Log.e(TAG, "error in emitting timer", error)
+                                            Log.e(TAG, "onError: error in emitting timer", error)
                                             events?.error("STREAM", "Error in processing observable", error.message)
                                         },
-                                        { Log.w(TAG, "closing the timer observable") }
+                                        { Log.w(TAG, "Complete: closing the timer observable") }
                                 )
 
                     }
