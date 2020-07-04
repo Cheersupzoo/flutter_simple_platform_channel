@@ -13,20 +13,7 @@ class PlatformChannel {
         'sendtext', {'message': text});
   }
 
-  void enableTimer() {
-    print(_onNumberChanged);
-    if (_onNumberChanged == null) {
-      _onNumberChanged = _eventChannel.receiveBroadcastStream().map((dynamic event) => event as int);
-    }
-  }
-
+  /// EventChannel com.test.platform/number
   Stream<int> get  getTimerStream => _eventChannel.receiveBroadcastStream().map((dynamic event) => event as int);
-
-  void disableTimer() {
-    if (_onNumberChanged != null) {
-      _onNumberChanged = null;
-    }
-    print(_onNumberChanged);
-  }
 
 }
