@@ -1,16 +1,26 @@
-# flutter_simple_platform_channel
+# Flutter Simple Platform Channel
 
-A new Flutter project.
+A simple Flutter project implement platform channel. This can be use as a template for MethodChannel on forward and reverse between Flutter and Native and EventChannel for Stream event. It is implement for Android Kotlin.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### Clone this project and access it directory
 
-A few resources to get you started if this is your first Flutter project:
+```
+git clone https://github.com/Cheersupzoo/flutter_simple_platform_channel.git
+cd flutter_simple_platform_channel
+```
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Install dependency
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
+flutter pub get
+```
+
+### Run the app
+
+```
+flutter run
+```
+
+
