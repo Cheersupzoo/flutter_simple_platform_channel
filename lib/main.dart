@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Simple Platform Channel'),
     );
   }
 }
@@ -56,64 +56,101 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Text for send',
+            _buildMethodChannel(context),
+            Divider(
+              height: 32,
+              thickness: 2,
+              color: Colors.grey[700],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32.0),
-              child: TextFormField(
-                controller: _textController,
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              'Text received',
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Text(
-              '$_textRecieved',
-              style: Theme.of(context).textTheme.headline5,
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            RaisedButton(
-                onPressed: () async {
-                  _textRecieved = await _platformChannel
-                      .getStringReturnFromPlatform(_textController.text);
-                  setState(() {});
-                },
-                child: Text("Send Text")),
-            Divider(height: 32, thickness: 4),
-            Text("Timer"),
-            Text(
-              "$_time",
-              style: Theme.of(context).textTheme.headline5,
-            ),
-            Row(children: <Widget>[
-              RaisedButton(
-                  onPressed: () async {
-                    _timerSubscription =
-                        _platformChannel.getTimerStream.listen((int time) {
-                      setState(() {
-                        _time = time;
-                      });
-                    });
-                  },
-                  child: Text("Start")),
-              RaisedButton(
-                  onPressed: () async {
-                    _timerSubscription.cancel();
-                  },
-                  child: Text("Stop")),
-            ])
+            _buildEventChannel(context),
           ],
         ),
       ),
+    );
+  }
+
+  Column _buildEventChannel(BuildContext context) {
+    return Column(
+            children: <Widget>[
+              Text(
+                'EventChannel',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text("Timer"),
+              Text(
+                "$_time",
+                style: Theme.of(context).textTheme.headline5,
+              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    RaisedButton(
+                        onPressed: () async {
+                          _timerSubscription = _platformChannel.getTimerStream
+                              .listen((int time) {
+                            setState(() {
+                              _time = time;
+                            });
+                          });
+                        },
+                        child: Text("Start")),
+                    SizedBox(width: 16),
+                    RaisedButton(
+                        onPressed: () async {
+                          _timerSubscription.cancel();
+                        },
+                        child: Text("Stop")),
+                  ])
+            ],
+          );
+  }
+
+  Column _buildMethodChannel(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Text(
+          'MethodChannel',
+          style: Theme.of(context).textTheme.headline4,
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        Text(
+          'Text for send',
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32.0),
+          child: TextFormField(
+            controller: _textController,
+          ),
+        ),
+        SizedBox(
+          height: 16,
+        ),
+        Text(
+          'Text received',
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        Text(
+          '$_textRecieved',
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        RaisedButton(
+            onPressed: () async {
+              _textRecieved = await _platformChannel
+                  .getStringReturnFromPlatform(_textController.text);
+              setState(() {});
+            },
+            child: Text("Send Text")),
+      ],
     );
   }
 }
