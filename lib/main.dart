@@ -70,45 +70,6 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Column _buildEventChannel(BuildContext context) {
-    return Column(
-            children: <Widget>[
-              Text(
-                'EventChannel',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              Text("Timer"),
-              Text(
-                "$_time",
-                style: Theme.of(context).textTheme.headline5,
-              ),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    RaisedButton(
-                        onPressed: () async {
-                          _timerSubscription = _platformChannel.getTimerStream
-                              .listen((int time) {
-                            setState(() {
-                              _time = time;
-                            });
-                          });
-                        },
-                        child: Text("Start")),
-                    SizedBox(width: 16),
-                    RaisedButton(
-                        onPressed: () async {
-                          _timerSubscription.cancel();
-                        },
-                        child: Text("Stop")),
-                  ])
-            ],
-          );
-  }
-
   Column _buildMethodChannel(BuildContext context) {
     return Column(
       children: <Widget>[
@@ -153,5 +114,44 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Text("Send Text")),
       ],
     );
+  }
+
+  Column _buildEventChannel(BuildContext context) {
+    return Column(
+            children: <Widget>[
+              Text(
+                'EventChannel',
+                style: Theme.of(context).textTheme.headline4,
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text("Timer"),
+              Text(
+                "$_time",
+                style: Theme.of(context).textTheme.headline5,
+              ),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    RaisedButton(
+                        onPressed: () async {
+                          _timerSubscription = _platformChannel.getTimerStream
+                              .listen((int time) {
+                            setState(() {
+                              _time = time;
+                            });
+                          });
+                        },
+                        child: Text("Start")),
+                    SizedBox(width: 16),
+                    RaisedButton(
+                        onPressed: () async {
+                          _timerSubscription.cancel();
+                        },
+                        child: Text("Stop")),
+                  ])
+            ],
+          );
   }
 }
